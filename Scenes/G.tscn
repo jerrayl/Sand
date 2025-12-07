@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://c386l7npb86wk"]
+
+[ext_resource type="Script" uid="uid://cx88qx7fwbuyl" path="res://Scripts/G.cs" id="1_mdpuj"]
+[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/SnapSlot.cs" id="2_mdpuj"]
+[ext_resource type="PackedScene" uid="uid://fv6wcsyfi0nq" path="res://Scenes/B.tscn" id="2_to3a5"]
+[ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://G.gdshader" id="3_uxab8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2b7i"]
+shader = ExtResource("3_uxab8")
+shader_parameter/fill_amount = 0.0
+shader_parameter/fill_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
+
+[node name="G" type="Node2D" node_paths=PackedStringArray("SpawnSlot") groups=["Draggable"]]
+script = ExtResource("1_mdpuj")
+BScene = ExtResource("2_to3a5")
+SpawnSlot = NodePath("Slot3")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_t2b7i")
+scale = Vector2(1, 1.095)
+color = Color(0.5372549, 0.5372549, 0.5372549, 1)
+polygon = PackedVector2Array(328, 401.82648, 496, 401.82648, 496, 306.8493, 640, 306.8493, 640, 401.82648, 800, 401.82648, 800, 43.835617, 704, 43.835617, 704, 116.89497, 624, 116.89497, 624, 43.835617, 504, 43.835617, 504, 116.89497, 424, 116.89497, 424, 43.835617, 328, 43.835617)
+
+[node name="Label" type="RichTextLabel" parent="."]
+offset_left = 536.0
+offset_top = 168.0
+offset_right = 600.0
+offset_bottom = 272.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 86
+text = "G"
+scroll_active = false
+autowrap_trim_flags = 0
+
+[node name="Slot1" type="Marker2D" parent="." groups=["Slot"]]
+position = Vector2(424, 48)
+script = ExtResource("2_mdpuj")
+AllowedShapes = Array[int]([0])
+
+[node name="Slot2" type="Marker2D" parent="." groups=["Slot"]]
+position = Vector2(624, 48)
+script = ExtResource("2_mdpuj")
+AllowedShapes = Array[int]([0])
+
+[node name="Slot3" type="Marker2D" parent="." groups=["Slot"]]
+position = Vector2(496, 336)
+script = ExtResource("2_mdpuj")
+AllowedShapes = Array[int]([2])

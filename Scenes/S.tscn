@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0dxe85j6iycc"]
+
+[ext_resource type="Script" uid="uid://cc554g0cegylf" path="res://Scripts/Slottable.cs" id="1_8ta4j"]
+
+[node name="S" type="Node2D" groups=["Draggable"]]
+z_index = 1000
+script = ExtResource("1_8ta4j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 25.0
+offset_bottom = 25.0
+color = Color(3.3591146, 3.3591146, 0.46343762, 1)

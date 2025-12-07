@@ -1,0 +1,2 @@
+FillIndicator shadow is using global position instead of local position
+B created by G is still a child of the slot even when it is moved away
