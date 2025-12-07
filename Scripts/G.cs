@@ -9,6 +9,8 @@ public partial class G : DraggableShape
 	public PackedScene BScene { get; set; }
 	[Export]
 	public SnapSlot SpawnSlot { get; set; }
+	[Export]
+	public Node2D RootNode { get; set; }
 
 	
 	private readonly List<SnapSlot> _slots = [];
@@ -19,7 +21,6 @@ public partial class G : DraggableShape
 	public override void _Ready()
 	{
 		GetSlots(this);
-		
 		_mat = GetNode<Polygon2D>("Polygon2D").Material as ShaderMaterial;
 
 		_timer = new Timer
@@ -40,6 +41,7 @@ public partial class G : DraggableShape
 		float t =  _countDown == -1 
 			? 0 
 			: 1f - ((float)_countDown / ProductionSeconds);
+	
 		_mat.SetShaderParameter("fill_amount", t);
 	}
 	
@@ -90,10 +92,10 @@ public partial class G : DraggableShape
 	private void SpawnB()
 	{
 		var block = BScene.Instantiate<Slottable>();
+		RootNode.AddChild(block);
 		block.GlobalPosition = SpawnSlot.GlobalPosition;
 		block.CurrentSlot = SpawnSlot;
 		SpawnSlot.Occupant = block;
-		GetTree().Root.AddChild(block);
 		block.Reparent(SpawnSlot);
 	}
 	

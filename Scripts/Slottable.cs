@@ -7,26 +7,13 @@ public partial class Slottable : DraggableShape
 	
 	[Export]
 	public float GlobalSnapRadius = 32f;
-	
-	// Where to put the square when it's not slotted
-	[Export]
-	public NodePath FreeParentPath;
 
 	private Node2D _freeParent;
 
 	public override void _Ready()
 	{
 		base._Ready();
-
-		if (FreeParentPath != null && !FreeParentPath.IsEmpty)
-		{
-			_freeParent = GetNode<Node2D>(FreeParentPath);
-		}
-		else
-		{
-			// Fallback: use current parent as the free parent
-			_freeParent = GetParent<Node2D>();
-		}
+		_freeParent = GetParent<Node2D>();
 	}
 
 	protected override void OnDragReleased()
