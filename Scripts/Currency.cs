@@ -12,6 +12,13 @@ public partial class Currency : RichTextLabel
 
 	public override void _Process(double delta)
 	{
-		Text = string.Join(" ", _global.Currencies.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
+		Text = string.Join(" ", _global.Currencies.Select(kvp => $"{GetCurrencyName(kvp.Key)}: {kvp.Value}"));
+	}
+	
+	public string GetCurrencyName(CurrencyType currencyType)
+	{
+		return _global.IdentifiedCurrencyTypes.Contains(currencyType)
+		? Labels.AbsoluteCurrencyNames[currencyType]
+		: Labels.MaskedCurrencyNames[currencyType];
 	}
 }

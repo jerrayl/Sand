@@ -68,7 +68,7 @@ public partial class ProcessingBlock : DraggableBlock
 
 		if (_countDown < 0)
 		{
-			_global.UpdateCurrency(CurrencyType.S, 1);
+			_global.UpdateCurrency(CurrencyType.Sand, 1);
 			slottedBlock.QueueFree();
 			_countDown = -1;
 		}

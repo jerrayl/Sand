@@ -6,6 +6,7 @@
 	public partial class GlobalManager : Node
 	{
 		public Dictionary<CurrencyType, int> Currencies { get; private set; } = new();
+		public HashSet<CurrencyType> IdentifiedCurrencyTypes { get; set; } = new();	
 		
 		public override void _Ready()
 		{
