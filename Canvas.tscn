@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://edugjstfyjn6"]
+[gd_scene load_steps=7 format=3 uid="uid://edugjstfyjn6"]
 
 [ext_resource type="PackedScene" uid="uid://c0dxe85j6iycc" path="res://Scenes/S.tscn" id="1_37vif"]
 [ext_resource type="PackedScene" uid="uid://c386l7npb86wk" path="res://Scenes/G.tscn" id="2_w0rvv"]
 [ext_resource type="PackedScene" uid="uid://b8s37406sgvqi" path="res://Scenes/C.tscn" id="3_4cguh"]
-[ext_resource type="Script" uid="uid://cm0rb8drrwij8" path="res://Scripts/Currency.cs" id="4_2cgcb"]
+[ext_resource type="Script" uid="uid://cm0rb8drrwij8" path="res://Scripts/Displays/Currency.cs" id="4_2cgcb"]
+[ext_resource type="PackedScene" uid="uid://cpjjn4c182a7c" path="res://Scenes/GravetenderD.tscn" id="5_arskn"]
+[ext_resource type="Script" uid="uid://8pulc4nv6qcp" path="res://Scripts/Displays/Tooltip.cs" id="6_umg3h"]
 
 [node name="Root" type="Node2D"]
 
@@ -18,7 +20,7 @@ scale = Vector2(0.3, 0.3)
 RootNode = NodePath("..")
 
 [node name="C" parent="." instance=ExtResource("3_4cguh")]
-position = Vector2(135.99997, -8)
+position = Vector2(56, -8)
 scale = Vector2(0.56, 0.56)
 
 [node name="Currency" type="RichTextLabel" parent="."]
@@ -27,3 +29,23 @@ offset_right = 1152.0
 offset_bottom = 40.0
 horizontal_alignment = 2
 script = ExtResource("4_2cgcb")
+
+[node name="GravetenderD" parent="." instance=ExtResource("5_arskn")]
+position = Vector2(568, 136)
+
+[node name="Tooltip" type="ColorRect" parent="."]
+visible = false
+offset_left = 960.0
+offset_top = 472.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.50534403, 0.5053441, 0.50534403, 1)
+script = ExtResource("6_umg3h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tooltip"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 184.0
+offset_bottom = 168.0
+text = "Hello World"

@@ -17,7 +17,7 @@ public enum CurrencyType
 	Insight
 }
 
-public static class Labels {
+public static class Labels {	
 	public static readonly Dictionary<CurrencyType, string> MaskedCurrencyNames = new() { 
 		{ CurrencyType.Sand, "S" },
 		{ CurrencyType.Words, "W" },
@@ -29,4 +29,10 @@ public static class Labels {
 		{ CurrencyType.Words, "Words" },
 		{ CurrencyType.Insight, "Insight" }
 	};
+	
+	public static readonly List<string> Dialogs = 
+	[
+		"Placeholder", // Occupies Index 0
+		"Hello World" // GravetenderD Button 1
+	];
 }

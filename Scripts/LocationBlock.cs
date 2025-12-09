@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -8,21 +9,24 @@ public partial class LocationBlock : DraggableBlock
 	[Export]
 	public PackedScene BScene { get; set; }
 	[Export]
+	public PackedScene HScene { get; set; }
+	[Export]
 	public Slot SpawnSlot { get; set; }
 	[Export]
 	public Node2D RootNode { get; set; }
 
-	
-	private readonly List<Slot> _slots = [];
+	private GlobalManager _global;
+	private List<Slot> _slots = [];
 	private Timer _timer;
 	private int _countDown = -1;
 	private ShaderMaterial _mat;
 	
 	public override void _Ready()
 	{
-		GetSlots(this);
+		_slots = Helpers.GetChildrenOfType<Slot>(this);
 		_mat = GetNode<Polygon2D>("Polygon2D").Material as ShaderMaterial;
-
+		_global = GetNode<GlobalManager>("/root/GlobalManager");
+		
 		_timer = new Timer
 		{
 			Name = "BehaviorTimer",
@@ -58,7 +62,7 @@ public partial class LocationBlock : DraggableBlock
 			}
 			
 			var shapeType = occupant.ShapeType;
-			if (shapeType == ShapeType.B)
+			if (shapeType == ShapeType.B || shapeType == ShapeType.H)
 			{
 				_countDown = -1;
 				return;
@@ -85,28 +89,18 @@ public partial class LocationBlock : DraggableBlock
 
 		if (_countDown < 0)
 		{
-			SpawnB();
+			SpawnBlock();
 			_countDown = -1;
 		}
 	}
 	
-	private void SpawnB()
+	private void SpawnBlock()
 	{
-		var block = BScene.Instantiate<Slottable>();
+		var scene = _global.ActivatedGBlock && new Random().NextDouble() < 0.5 ? HScene : BScene;
+		var block = scene.Instantiate<Slottable>();
 		RootNode.AddChild(block);
 		block.GlobalPosition = SpawnSlot.GlobalPosition;
 		block.CurrentSlot = SpawnSlot;
 		block.Reparent(SpawnSlot);
-	}
-	
-	private void GetSlots(Node node)
-	{
-		foreach (Node child in node.GetChildren())
-		{
-			if (child is Slot slot)
-				_slots.Add(slot);
-
-			GetSlots(child);
-		}
 	}
 }

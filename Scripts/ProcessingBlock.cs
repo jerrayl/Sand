@@ -8,14 +8,14 @@ public partial class ProcessingBlock : DraggableBlock
 	public int ProductionSeconds { get; set; } = 15;
 	
 	private GlobalManager _global;
-	private readonly List<Slot> _slots = [];
+	private List<Slot> _slots = [];
 	private Timer _timer;
 	private int _countDown = -1;
 	private ShaderMaterial _mat;
 	
 	public override void _Ready()
 	{
-		GetSlots(this);
+		_slots = Helpers.GetChildrenOfType<Slot>(this);
 		_mat = GetNode<Polygon2D>("Polygon2D").Material as ShaderMaterial;
 		_global = GetNode<GlobalManager>("/root/GlobalManager");
 
@@ -71,17 +71,6 @@ public partial class ProcessingBlock : DraggableBlock
 			_global.UpdateCurrency(CurrencyType.Sand, 1);
 			slottedBlock.QueueFree();
 			_countDown = -1;
-		}
-	}
-	
-	private void GetSlots(Node node)
-	{
-		foreach (Node child in node.GetChildren())
-		{
-			if (child is Slot slot)
-				_slots.Add(slot);
-
-			GetSlots(child);
 		}
 	}
 }
