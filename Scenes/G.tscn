@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c386l7npb86wk"]
 
-[ext_resource type="Script" uid="uid://cx88qx7fwbuyl" path="res://Scripts/G.cs" id="1_mdpuj"]
-[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/SnapSlot.cs" id="2_mdpuj"]
+[ext_resource type="Script" uid="uid://cx88qx7fwbuyl" path="res://Scripts/LocationBlock.cs" id="1_3si6a"]
 [ext_resource type="PackedScene" uid="uid://fv6wcsyfi0nq" path="res://Scenes/B.tscn" id="2_to3a5"]
-[ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://G.gdshader" id="3_uxab8"]
+[ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://FillIndicator.gdshader" id="3_uxab8"]
+[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/Slot.cs" id="4_3si6a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2b7i"]
 shader = ExtResource("3_uxab8")
@@ -11,9 +11,10 @@ shader_parameter/fill_amount = 0.0
 shader_parameter/fill_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
 [node name="G" type="Node2D" node_paths=PackedStringArray("SpawnSlot") groups=["Draggable"]]
-script = ExtResource("1_mdpuj")
+script = ExtResource("1_3si6a")
 BScene = ExtResource("2_to3a5")
 SpawnSlot = NodePath("Slot3")
+ShapeType = 1
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_t2b7i")
@@ -34,15 +35,15 @@ autowrap_trim_flags = 0
 
 [node name="Slot1" type="Marker2D" parent="." groups=["Slot"]]
 position = Vector2(424, 48)
-script = ExtResource("2_mdpuj")
+script = ExtResource("4_3si6a")
 AllowedShapes = Array[int]([0])
 
 [node name="Slot2" type="Marker2D" parent="." groups=["Slot"]]
 position = Vector2(624, 48)
-script = ExtResource("2_mdpuj")
+script = ExtResource("4_3si6a")
 AllowedShapes = Array[int]([0])
 
 [node name="Slot3" type="Marker2D" parent="." groups=["Slot"]]
 position = Vector2(496, 336)
-script = ExtResource("2_mdpuj")
+script = ExtResource("4_3si6a")
 AllowedShapes = Array[int]([2])

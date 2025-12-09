@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class DraggableShape : Node2D
+public partial class DraggableBlock : Node2D
 {
 	[Export]
 	public ShapeType ShapeType { get; set; }
@@ -23,6 +23,7 @@ public partial class DraggableShape : Node2D
 					{
 						_isDragging = true;
 						_dragOffset = GlobalPosition - mousePos;
+						OnDragStarted();
 					}
 				}
 				else
@@ -69,12 +70,12 @@ public partial class DraggableShape : Node2D
 	{
 		var nodes = GetTree().GetNodesInGroup("Draggable");
 
-		DraggableShape topShape = null;
+		DraggableBlock topBlock = null;
 		int topZ = int.MinValue;
 
 		foreach (Node node in nodes)
 		{
-			if (node is not DraggableShape shape)
+			if (node is not DraggableBlock shape)
 				continue;
 
 			if (!shape.IsMouseOver(globalMousePos))
@@ -83,13 +84,17 @@ public partial class DraggableShape : Node2D
 			if (shape.ZIndex > topZ)
 			{
 				topZ = shape.ZIndex;
-				topShape = shape;
+				topBlock = shape;
 			}
 		}
 
-		return topShape == this;
+		return topBlock == this;
 	}
-	
+
+	protected virtual void OnDragStarted()
+	{
+	}
+
 	protected virtual void OnDragReleased()
 	{
 	}

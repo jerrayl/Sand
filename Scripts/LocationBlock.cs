@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class G : DraggableShape
+public partial class LocationBlock : DraggableBlock
 {
 	[Export]
 	public int ProductionSeconds { get; set; } = 30;
 	[Export]
 	public PackedScene BScene { get; set; }
 	[Export]
-	public SnapSlot SpawnSlot { get; set; }
+	public Slot SpawnSlot { get; set; }
 	[Export]
 	public Node2D RootNode { get; set; }
 
 	
-	private readonly List<SnapSlot> _slots = [];
+	private readonly List<Slot> _slots = [];
 	private Timer _timer;
 	private int _countDown = -1;
 	private ShaderMaterial _mat;
@@ -51,12 +51,13 @@ public partial class G : DraggableShape
 		
 		foreach (var slot in _slots)
 		{
-			if (slot.IsFree)
+			var occupant = slot.Occupant;
+			if (occupant is null)
 			{
 				continue;	
 			}
 			
-			var shapeType = slot.Occupant.ShapeType;
+			var shapeType = occupant.ShapeType;
 			if (shapeType == ShapeType.B)
 			{
 				_countDown = -1;
@@ -95,7 +96,6 @@ public partial class G : DraggableShape
 		RootNode.AddChild(block);
 		block.GlobalPosition = SpawnSlot.GlobalPosition;
 		block.CurrentSlot = SpawnSlot;
-		SpawnSlot.Occupant = block;
 		block.Reparent(SpawnSlot);
 	}
 	
@@ -103,7 +103,7 @@ public partial class G : DraggableShape
 	{
 		foreach (Node child in node.GetChildren())
 		{
-			if (child is SnapSlot slot)
+			if (child is Slot slot)
 				_slots.Add(slot);
 
 			GetSlots(child);

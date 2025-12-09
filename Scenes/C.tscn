@@ -1,28 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8s37406sgvqi"]
+[gd_scene load_steps=5 format=3 uid="uid://b8s37406sgvqi"]
 
-[ext_resource type="Script" uid="uid://cx88qx7fwbuyl" path="res://Scripts/G.cs" id="1_62xgf"]
-[ext_resource type="PackedScene" uid="uid://fv6wcsyfi0nq" path="res://Scenes/B.tscn" id="2_vdqfc"]
-[ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://G.gdshader" id="3_0afs6"]
-[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/SnapSlot.cs" id="4_bwy48"]
+[ext_resource type="Script" uid="uid://c5doegqbwbrxi" path="res://Scripts/ProcessingBlock.cs" id="1_6xfgo"]
+[ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://FillIndicator.gdshader" id="3_0afs6"]
+[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/Slot.cs" id="3_6xfgo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2b7i"]
 shader = ExtResource("3_0afs6")
 shader_parameter/fill_amount = 0.0
 shader_parameter/fill_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
-[node name="C" type="Node2D" node_paths=PackedStringArray("SpawnSlot") groups=["Draggable"]]
-script = ExtResource("1_62xgf")
-BScene = ExtResource("2_vdqfc")
-SpawnSlot = NodePath("Slot3")
+[node name="C" type="Node2D" groups=["Draggable"]]
+script = ExtResource("1_6xfgo")
 ShapeType = 3
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_t2b7i")
 scale = Vector2(1, 1.095)
 color = Color(0.5372549, 0.5372549, 0.5372549, 1)
-polygon = PackedVector2Array(640, 409.13242, 800, 409.13242, 800, 43.835617, 640, 43.835617, 640, 73.05936, 680, 73.05936, 680, 372.60272, 640, 372.60272, 760, 73.05936, 800, 73.05936, 760, 409.13242, 800, 372.60272, 760, 372.60272, 680, 146.11871, 760, 146.11871, 680, 299.54337, 760, 299.54337)
+polygon = PackedVector2Array(640, 409.13242, 800, 409.13242, 800, 43.835617, 640, 43.835617, 640, 73.05936, 680, 73.05936, 760, 73.05936, 800, 73.05936, 760, 409.13242, 680, 146.11871, 760, 146.11871, 679.7228, 409.13245)
 uv = PackedVector2Array(640, 409.13242, 800, 409.13242, 800, 43.835617, 640, 43.835617, 688, 80.365295, 760, 80.365295, 768, 131.50685, 688, 131.50685, 687.0729, 78.95726)
-polygons = [PackedInt32Array(3, 2, 9, 4), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 11, 12), PackedInt32Array(7, 11, 1, 0), PackedInt32Array(13, 14, 16, 15)]
+polygons = [PackedInt32Array(3, 2, 7, 4), PackedInt32Array(4, 5, 11, 0), PackedInt32Array(6, 7, 1, 8), PackedInt32Array(9, 10, 8, 11)]
 
 [node name="Label" type="RichTextLabel" parent="."]
 offset_left = 688.0
@@ -37,15 +34,5 @@ autowrap_trim_flags = 0
 
 [node name="Slot1" type="Marker2D" parent="." groups=["Slot"]]
 position = Vector2(680, 80)
-script = ExtResource("4_bwy48")
-AllowedShapes = Array[int]([2])
-
-[node name="Slot2" type="Marker2D" parent="." groups=["Slot"]]
-position = Vector2(616, 48)
-script = ExtResource("4_bwy48")
-AllowedShapes = Array[int]([2])
-
-[node name="Slot3" type="Marker2D" parent="." groups=["Slot"]]
-position = Vector2(680, 328)
-script = ExtResource("4_bwy48")
+script = ExtResource("3_6xfgo")
 AllowedShapes = Array[int]([2])

@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class Slottable : DraggableShape
+public partial class Slottable : DraggableBlock
 {
-	public SnapSlot CurrentSlot { get; set; }
+	public Slot CurrentSlot { get; set; }
 	
 	[Export]
 	public float GlobalSnapRadius = 32f;
@@ -15,6 +15,12 @@ public partial class Slottable : DraggableShape
 		base._Ready();
 		_freeParent = GetParent<Node2D>();
 	}
+	
+	protected override void OnDragStarted()
+	{
+		base.OnDragStarted();
+		DetachFromSlot();
+	}
 
 	protected override void OnDragReleased()
 	{
@@ -24,7 +30,7 @@ public partial class Slottable : DraggableShape
 
 	private void TrySnapToNearestSlot()
 	{
-		SnapSlot closestSlot = null;
+		Slot closestSlot = null;
 		float closestDistSq = GlobalSnapRadius * GlobalSnapRadius;
 		float snapRadiusSq = closestDistSq;
 
@@ -33,7 +39,7 @@ public partial class Slottable : DraggableShape
 
 		foreach (Node node in slotNodes)
 		{
-			if (node is not SnapSlot slot)
+			if (node is not Slot slot)
 				continue;
 				
 			if (!slot.Accepts(this))
@@ -42,7 +48,7 @@ public partial class Slottable : DraggableShape
 			float distSq = GlobalPosition.DistanceSquaredTo(slot.GlobalPosition);
 
 			// Slot must be close enough AND either free or already holding us
-			if (distSq < snapRadiusSq && distSq <= closestDistSq && (slot.IsFree || slot == CurrentSlot))
+			if (distSq < snapRadiusSq && distSq <= closestDistSq && (slot.Occupant is null || slot == CurrentSlot))
 			{
 				closestDistSq = distSq;
 				closestSlot = slot;
@@ -53,22 +59,11 @@ public partial class Slottable : DraggableShape
 		{
 			SnapIntoSlot(closestSlot);
 		}
-		else
-		{
-			DetachFromSlot();
-		}
 	}
 	
-	private void SnapIntoSlot(SnapSlot newSlot)
+	private void SnapIntoSlot(Slot newSlot)
 	{
-		// Free old slot, if any
-		if (CurrentSlot != null && CurrentSlot != newSlot)
-		{
-			CurrentSlot.Occupant = null;
-		}
-
 		CurrentSlot = newSlot;
-		CurrentSlot.Occupant = this;
 
 		if (GetParent() != CurrentSlot)
 		{
@@ -83,7 +78,6 @@ public partial class Slottable : DraggableShape
 	{
 		if (CurrentSlot != null)
 		{
-			CurrentSlot.Occupant = null;
 			CurrentSlot = null;
 		}
 

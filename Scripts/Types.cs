@@ -3,5 +3,13 @@ public enum ShapeType
 	S,
 	G,
 	B,
-	C
+	C,
+	H
+}
+
+
+public enum CurrencyType
+{
+	S,
+	W
 }

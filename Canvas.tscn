@@ -1,21 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://edugjstfyjn6"]
+[gd_scene load_steps=6 format=3 uid="uid://edugjstfyjn6"]
 
 [ext_resource type="PackedScene" uid="uid://c0dxe85j6iycc" path="res://Scenes/S.tscn" id="1_37vif"]
 [ext_resource type="PackedScene" uid="uid://c386l7npb86wk" path="res://Scenes/G.tscn" id="2_w0rvv"]
 [ext_resource type="PackedScene" uid="uid://b8s37406sgvqi" path="res://Scenes/C.tscn" id="3_4cguh"]
+[ext_resource type="Script" uid="uid://cm0rb8drrwij8" path="res://Scripts/Currency.cs" id="4_2cgcb"]
+[ext_resource type="PackedScene" uid="uid://fv6wcsyfi0nq" path="res://Scenes/B.tscn" id="5_arskn"]
 
 [node name="Root" type="Node2D"]
 
 [node name="S" parent="." instance=ExtResource("1_37vif")]
 
 [node name="S2" parent="." instance=ExtResource("1_37vif")]
-position = Vector2(31, 0)
+position = Vector2(40, 0)
 
 [node name="G" parent="." node_paths=PackedStringArray("RootNode") instance=ExtResource("2_w0rvv")]
-position = Vector2(90, 8)
+position = Vector2(80, 0)
 scale = Vector2(0.3, 0.3)
 RootNode = NodePath("..")
 
 [node name="C" parent="." instance=ExtResource("3_4cguh")]
-position = Vector2(56, -8)
+position = Vector2(135.99997, -8)
 scale = Vector2(0.56, 0.56)
+
+[node name="Currency" type="RichTextLabel" parent="."]
+offset_left = 1024.0
+offset_right = 1152.0
+offset_bottom = 40.0
+script = ExtResource("4_2cgcb")
+
+[node name="B" parent="." instance=ExtResource("5_arskn")]
+position = Vector2(416, 216)
