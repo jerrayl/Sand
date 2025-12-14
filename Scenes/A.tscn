@@ -9,9 +9,9 @@ shader = ExtResource("3_0afs6")
 shader_parameter/fill_amount = 0.0
 shader_parameter/fill_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
-[node name="C" type="Node2D" groups=["Draggable"]]
+[node name="A" type="Node2D" groups=["Draggable"]]
 script = ExtResource("1_6xfgo")
-ShapeType = 3
+ShapeType = 5
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_t2b7i")
@@ -28,7 +28,7 @@ offset_right = 752.0
 offset_bottom = 288.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 86
-text = "C"
+text = "A"
 scroll_active = false
 autowrap_trim_flags = 0
 

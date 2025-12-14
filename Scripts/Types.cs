@@ -6,7 +6,9 @@ public enum ShapeType
 	G,
 	B,
 	C,
-	H
+	H,
+	A,
+	L
 }
 
 
