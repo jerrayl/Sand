@@ -1,20 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1n7t0p7a5tsc"]
+[gd_scene load_steps=5 format=3 uid="uid://d1n7t0p7a5tsc"]
 
-[ext_resource type="Script" path="res://Scripts/G.cs" id="1_xgp3s"]
-[ext_resource type="PackedScene" uid="uid://fv6wcsyfi0nq" path="res://Scenes/B.tscn" id="2_46xdh"]
+[ext_resource type="Script" uid="uid://c5doegqbwbrxi" path="res://Scripts/ProcessingBlock.cs" id="1_il862"]
 [ext_resource type="Shader" uid="uid://ddikixq5saqmm" path="res://FillIndicator.gdshader" id="3_f3svd"]
-[ext_resource type="Script" path="res://Scripts/SnapSlot.cs" id="4_0wey3"]
+[ext_resource type="Script" uid="uid://pfcb8ghdcr7g" path="res://Scripts/Slot.cs" id="4_0wey3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2b7i"]
 shader = ExtResource("3_f3svd")
 shader_parameter/fill_amount = 0.0
 shader_parameter/fill_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
-[node name="C" type="Node2D" node_paths=PackedStringArray("SpawnSlot") groups=["Draggable"]]
-script = ExtResource("1_xgp3s")
-BScene = ExtResource("2_46xdh")
-SpawnSlot = NodePath("Slot3")
-ShapeType = 3
+[node name="C" type="Node2D" groups=["Draggable"]]
+script = ExtResource("1_il862")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_t2b7i")

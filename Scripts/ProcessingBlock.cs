@@ -12,6 +12,7 @@ public partial class ProcessingBlock : DraggableBlock
 	private Timer _timer;
 	private int _countDown = -1;
 	private ShaderMaterial _mat;
+	private DraggableBlock _slottedBlock;
 	
 	public override void _Ready()
 	{
@@ -43,34 +44,31 @@ public partial class ProcessingBlock : DraggableBlock
 	
 	private void UpdateCountDown() 
 	{
-		var slot = _slots.Single();
-		var slottedBlock = slot.Occupant;
-		var slottedShapeType = slottedBlock?.ShapeType;
-
-		if (slottedShapeType is null)
+		if (_countDown == -1) 
 		{
-			return;		
-		}
-		
-		if (slottedShapeType is ShapeType.H) 
-		{
-			// TODO: Add handling for this case
+			CheckSlottedBlock();
 			return;
 		}
 			
-		if (_countDown == -1)
-		{
-			_countDown = ProductionSeconds;
-			return;
-		}
-
 		_countDown -= 1;
-
+		
 		if (_countDown < 0)
 		{
 			_global.UpdateCurrency(CurrencyType.Sand, 1);
-			slottedBlock.QueueFree();
+			_slottedBlock.QueueFree();
 			_countDown = -1;
 		}
+	}
+	private void CheckSlottedBlock()
+	{
+		var slot = _slots.Single();
+		_slottedBlock = slot.Occupant;
+		if (occupant is null)
+		{
+			return;
+		}
+		var slottedShapeType = _slottedBlock?.ShapeType;
+		_slottedBlock.IsDraggable = false;
+		_countDown = ProductionSeconds;
 	}
 }

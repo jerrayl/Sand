@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0dxe85j6iycc" path="res://Scenes/S.tscn" id="1_37vif"]
 [ext_resource type="PackedScene" uid="uid://c386l7npb86wk" path="res://Scenes/G.tscn" id="2_w0rvv"]
-[ext_resource type="PackedScene" uid="uid://b8s37406sgvqi" path="res://Scenes/C.tscn" id="3_4cguh"]
+[ext_resource type="PackedScene" uid="uid://b8s37406sgvqi" path="res://Scenes/A.tscn" id="3_4cguh"]
 [ext_resource type="Script" uid="uid://cm0rb8drrwij8" path="res://Scripts/Displays/Currency.cs" id="4_2cgcb"]
 [ext_resource type="PackedScene" uid="uid://cpjjn4c182a7c" path="res://Scenes/GravetenderD.tscn" id="5_arskn"]
 [ext_resource type="Script" uid="uid://8pulc4nv6qcp" path="res://Scripts/Displays/Tooltip.cs" id="6_umg3h"]
@@ -19,7 +19,7 @@ position = Vector2(80, 0)
 scale = Vector2(0.3, 0.3)
 RootNode = NodePath("..")
 
-[node name="C" parent="." instance=ExtResource("3_4cguh")]
+[node name="A" parent="." instance=ExtResource("3_4cguh")]
 position = Vector2(56, -8)
 scale = Vector2(0.56, 0.56)
 

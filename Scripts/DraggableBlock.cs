@@ -6,11 +6,18 @@ public partial class DraggableBlock : Node2D
 	[Export]
 	public ShapeType ShapeType { get; set; }
 	
+	public bool IsDraggable { get; set; } = true;
+	
 	private bool _isDragging = false;
 	private Vector2 _dragOffset;
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!IsDraggable)
+		{
+			return;
+		}
+		
 		if (@event is InputEventMouseButton mouseButtonEvent)
 		{
 			if (mouseButtonEvent.ButtonIndex == MouseButton.Left)
